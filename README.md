@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nextjs ContentLayer
+
+This repository has an example project for ContentLayer with Next.js and TypeScript, bootstrapped with Create Next App.
 
 ## Getting Started
 
@@ -12,23 +14,42 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+You should edit fields in `contentlayer.config.js` and define your keys with type, description, and required flags.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```json
+fields: {
+    [key]: {
+      type: string,
+      description: string,
+      required: boolean,
+    },
+    ...
+  },
+```
 
-## Learn More
+After that, edit the resolve path in the URL if necessary.
 
-To learn more about Next.js, take a look at the following resources:
+## Markdown Posts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+In the default config, you need to keep your posts inside the `posts` folder. If you want to change the path, you need to update `contentDirPath` in `contentlayer.config.js`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```js
+export default makeSource({
+  contentDirPath: "<PATH>",
+  documentTypes: [Post],
+});
+```
 
-## Deploy on Vercel
+You must define header parameters for each post if it's required.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Example
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```md
+---
+title: What is Lorem Ipsum
+subtitle: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+date: 2022-05-07
+---
+```
